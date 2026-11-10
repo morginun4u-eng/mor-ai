@@ -26,7 +26,7 @@ jobs:
 
       - name: Extract MOR AI V2
         run: |
-          unzip -o -q MOR_AI_V2_NEW_DOWNLOAD.zip
+          unzip -o -q MOR_AI_V2_NEW_DOWNLOAD-1.zip
           test -f MOR-AI/settings.gradle
 
       - name: Prepare Android SDK
