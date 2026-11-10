@@ -1,4 +1,5 @@
 name: Build MOR AI APK
+name: Build MOR AI V2 APK
 
 on:
   workflow_dispatch:
@@ -24,9 +25,9 @@ jobs:
         with:
           gradle-version: '8.10.2'
 
-      - name: Extract MOR AI
+      - name: Extract MOR AI V2
         run: |
-          unzip -o -q MOR_AI_FRESH_DOWNLOAD.zip
+          unzip -o -q MOR_AI_V2_NEW_DOWNLOAD.zip
           test -f MOR-AI/settings.gradle
 
       - name: Prepare Android SDK
@@ -54,6 +55,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: MOR-AI-APK
+          name: MOR-AI-V2-APK
           path: MOR-AI/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
