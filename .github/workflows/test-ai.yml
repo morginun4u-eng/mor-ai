@@ -1,0 +1,27 @@
+
+name: Test MOR AI Connection
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-ai:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Test MOR AI chat
+        env:
+          MOR_AI_APP_TOKEN: ${{ secrets.MOR_AI_APP_TOKEN }}
+        run: node backend/test-chat.js
