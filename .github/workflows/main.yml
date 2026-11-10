@@ -3,10 +3,6 @@ name: Build MOR AI V2 APK
 on:
   workflow_dispatch:
 
-
-on:
-  workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
