@@ -85,9 +85,10 @@ http.createServer(async (req, res) => {
     );
 
     if (!response.ok) {
-      return reply(res, 502, {
-        error: "AI unavailable"
-      });
+  console.error("OpenAI error status:", response.status);
+  return reply(res, 502, {
+    error: "AI unavailable"
+  });
     }
 
     const data = await response.json();
