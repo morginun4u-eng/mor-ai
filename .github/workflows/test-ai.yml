@@ -13,6 +13,17 @@ jobs:
     timeout-minutes: 5
 
     steps:
+    
+      - name: Check authentication configuration
+        env:
+          MOR_AI_APP_TOKEN: ${{ secrets.MOR_AI_APP_TOKEN }}
+        run: |
+          if [ -z "$MOR_AI_APP_TOKEN" ]; then
+            echo "ERROR: GitHub secret is missing or empty"
+            exit 1
+          fi
+          echo "GitHub secret is configured"
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
