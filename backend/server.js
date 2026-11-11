@@ -2,7 +2,8 @@ const http = require("node:http");
 
 const PORT = process.env.PORT || 3000;
 const API_KEY = process.env.OPENAI_API_KEY;
-const APP_TOKEN = process.env.MOR_AI_APP_TOKEN;
+
+const APP_TOKEN = (process.env.MOR_AI_APP_TOKEN || "").trim();
 
 const instructions = `
 את MOR AI, עוזרת קולית חכמה לרכב.
@@ -35,9 +36,14 @@ http.createServer(async (req, res) => {
     return reply(res, 503, { error: "Not configured" });
   }
 
-  if (req.headers.authorization !== "Bearer " + APP_TOKEN) {
+  const suppliedToken = (req.headers.authorization || "")
+    .replace(/^Bearer\s+/i, "")
+    .trim();
+
+  if (suppliedToken !== APP_TOKEN) {
     return reply(res, 401, { error: "Unauthorized" });
   }
+
 
   try {
     let raw = "";
